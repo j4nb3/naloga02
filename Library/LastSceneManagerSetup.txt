@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/main_scene.unity
+- path: Random Maze/Maze.unity
   isLoaded: 1
   isActive: 1
