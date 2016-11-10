@@ -5,6 +5,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public GameObject pauseMenu;
+    public GameObject inventory;
 
     private Rigidbody rb;
     private bool isPaused;
@@ -37,5 +38,11 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         rb.AddForce(movement * 10);
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("PickUp")) {
+            Destroy(other.gameObject);
+        }
     }
 }
