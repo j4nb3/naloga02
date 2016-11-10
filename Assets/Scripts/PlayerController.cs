@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
     public GameObject pauseMenu;
-    public GameObject inventory;
+    public GameObject inventoryMenu;
 
     private Rigidbody rb;
     private bool isPaused;
-    private GameObject[] pauseMenuChildren;
+    private Inventory inventory;
+    
 
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
+        inventory = inventoryMenu.GetComponent<Inventory>();
         isPaused = false;
+
+        //inventory = new Inventory();
 	}
 	
 	// Update is called once per frame
@@ -42,7 +47,11 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("PickUp")) {
-            Destroy(other.gameObject);
+            Item item = other.GetComponent<Item>();
+            print(item.itemName);
+            if (inventory.AddItem(item)){
+                Destroy(item.gameObject);
+            }
         }
     }
 }
