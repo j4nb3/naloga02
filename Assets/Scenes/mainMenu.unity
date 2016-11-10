@@ -1449,7 +1449,8 @@ AudioSource:
   m_GameObject: {fileID: 547081453}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300001, guid: 0db7d1d1fd0a5ef42890c954021ab4b8,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: d29c69e60e21e2444948200de2bfe6a7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3633,7 +3634,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1830671112}
+        m_MethodName: set_volume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1830671111
@@ -3660,7 +3672,7 @@ AudioSource:
   m_GameObject: {fileID: 1830671111}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300001, guid: 0db7d1d1fd0a5ef42890c954021ab4b8,
+  OutputAudioMixerGroup: {fileID: 243000012214842044, guid: 0db7d1d1fd0a5ef42890c954021ab4b8,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4ec13d5a46c3bde49bcf593241863213, type: 3}
   m_PlayOnAwake: 1
