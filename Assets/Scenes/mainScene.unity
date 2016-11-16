@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37356418, g: 0.38112003, b: 0.35887662, a: 1}
+  m_IndirectSpecularColor: {r: 0.37356448, g: 0.3811204, b: 0.35887685, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -549,6 +549,7 @@ GameObject:
   - 222: {fileID: 96157173}
   - 114: {fileID: 96157172}
   - 114: {fileID: 96157171}
+  - 114: {fileID: 96157174}
   m_Layer: 5
   m_Name: OptionsPanel
   m_TagString: Untagged
@@ -633,6 +634,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 96157169}
+--- !u!114 &96157174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 96157169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5aa35646ded4a4ea7209b29633742e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1504424847}
+  selectedObject: {fileID: 1728360740}
 --- !u!1 &114830879
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +922,7 @@ GameObject:
   - 222: {fileID: 207557177}
   - 114: {fileID: 207557176}
   - 114: {fileID: 207557175}
+  - 114: {fileID: 207557178}
   m_Layer: 5
   m_Name: PausePanel
   m_TagString: Untagged
@@ -989,6 +1004,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 207557173}
+--- !u!114 &207557178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 207557173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5aa35646ded4a4ea7209b29633742e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1504424847}
+  selectedObject: {fileID: 1604808390}
 --- !u!1 &224180941
 GameObject:
   m_ObjectHideFlags: 0
@@ -5781,6 +5809,7 @@ GameObject:
   - 114: {fileID: 1396959616}
   - 114: {fileID: 1396959618}
   - 114: {fileID: 1396959619}
+  - 114: {fileID: 1396959620}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -5884,6 +5913,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa662ac32ace7094b9737195c0e6dcfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1396959620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396959614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5aa35646ded4a4ea7209b29633742e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1504424847}
+  selectedObject: {fileID: 1567153677}
 --- !u!1 &1466126354
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,6 +50,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Start()
         {
             isPaused = false;
+            Cursor.visible = false;
 
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
@@ -92,11 +93,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0.0f;
                 isPaused = true;
+                Cursor.visible = true;
             }
             else if(Input.GetKeyDown(KeyCode.Escape) && isPaused) {
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1.0f;
                 isPaused = false;
+                Cursor.visible = false;
             }
         }
 
@@ -253,6 +256,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
+            if (isPaused) {
+                return;
+            }
             m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
 
