@@ -42,15 +42,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
-        public GameObject pauseMenu;
-
-        private bool isPaused;
-
         // Use this for initialization
         private void Start()
         {
-            isPaused = false;
-
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -87,17 +81,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
-
-            if (Input.GetKeyDown(KeyCode.Escape) && !isPaused) {
-                pauseMenu.SetActive(true);
-                Time.timeScale = 0.0f;
-                isPaused = true;
-            }
-            else if(Input.GetKeyDown(KeyCode.Escape) && isPaused) {
-                pauseMenu.SetActive(false);
-                Time.timeScale = 1.0f;
-                isPaused = false;
-            }
         }
 
 
