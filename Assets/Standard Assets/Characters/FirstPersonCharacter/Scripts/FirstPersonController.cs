@@ -51,6 +51,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             isPaused = false;
             Cursor.visible = false;
+            Time.timeScale = 1.0f;
 
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
