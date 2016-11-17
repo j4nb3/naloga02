@@ -37,7 +37,7 @@ public class HealthBar : MonoBehaviour {
             Application.LoadLevel(0); //naloži death sceno (ko bo) 
         }
 
-        if (Input.GetKey("left shift"))
+        if (Input.GetKey("left shift") && fpc.m_MoveDir.x!=0f)
         {
             regenST = false;
             Stamina.value -= 1;
