@@ -11,4 +11,10 @@ public class Item : MonoBehaviour {
         get { return itemName; }
         set { itemName = value; }
     }*/
+
+    void OnTriggerEnter(Collider other) {
+        PlayerInventory inventory = other.GetComponent<PlayerInventory>();
+        inventory.addItem(this);
+        Destroy(gameObject);
+    }
 }
