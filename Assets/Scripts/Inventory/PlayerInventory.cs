@@ -5,10 +5,14 @@ using System.Collections.Generic;
 public class PlayerInventory : MonoBehaviour {
 
     private List<Item> items;
+    private int itemsMax;
+    private bool itemsChanged;
 
 	// Use this for initialization
 	void Start () {
         items = new List<Item>();
+        itemsMax = 9;
+        itemsChanged = false;
 	}
 	
 	// Update is called once per frame
@@ -17,8 +21,13 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
     public void addItem(Item item) {
-        items.Add(item);
-        print(items.Count + " items in inventory.");
+        if (items.Count < itemsMax) {
+            items.Add(item);
+            itemsChanged = true;
+            print(items.Count + " items in inventory.");
+        }
+        else
+            print("Inventory full.");
     }
 
     public Item getItem(int index) {
@@ -27,5 +36,13 @@ public class PlayerInventory : MonoBehaviour {
 
     public int itemCount() {
         return items.Count;
+    }
+
+    public bool getItemsChanged() {
+        return itemsChanged;
+    }
+
+    public void clearItemsChanged() {
+        itemsChanged = false;
     }
 }

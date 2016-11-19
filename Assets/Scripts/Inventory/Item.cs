@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 
-    public string itemName;
     public int itemID;
+    public string itemName;
+    public string itemDesc;  
     public Texture2D itemIcon;
 
     /*public string ItemName {
