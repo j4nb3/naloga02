@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea35ecec83997a04b96e4f06fa2a23e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_HP: 10
+  max_HP: 500
   max_ST: 300
   Health: {fileID: 809961565}
   Stamina: {fileID: 1251471428}
