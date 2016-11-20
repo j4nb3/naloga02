@@ -122,7 +122,7 @@ public class Maze : MonoBehaviour {
 		List<Tuple<int, int>>history = new List<Tuple<int, int>>();
 		history.Add (new Tuple<int, int>(r, c));
 		while(history.Count>0){
-			M [r, c, 1] = 1;
+			M [r, c, 4] = 1;
 			List<char> check = new List<char> ();
 			if(c > 0 && M[r, c-1, 4]==0){
 				check.Add ('L');
@@ -183,14 +183,21 @@ public class Maze : MonoBehaviour {
 				if(cell_data[3] == 1){
 					CreateMazeWall (new IntVector2 (row, col), 3);
 				}
+				CreateCell (new IntVector2 (row, col));
 			}
 		}
 
 
 	}
 	public void Generate () {
+		/*cells = new MazeCell[size.x, size.z];
+		walls = new MazeWall[size.x, size.z];
 		GenV2 ();
-
+		*/
+		CreateMazeWall (new IntVector2 (row, col), 0);
+		CreateMazeWall (new IntVector2 (row, col), 1);
+		CreateMazeWall (new IntVector2 (row, col), 2);
+		CreateMazeWall (new IntVector2 (row, col), 3);
 	}
 
 	private void CreateCell (IntVector2 coordinates) {
@@ -217,8 +224,18 @@ public class Maze : MonoBehaviour {
 		newWall.coordinates = coordinates;
 		newWall.name = "Maze Wall " + coordinates.x + ", " + coordinates.z;
 		newWall.transform.parent = transform;
-		newWall.transform.localPosition =
-			new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		if (direction = 0) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		}
+		if (direction = 1) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		}
+		if (direction = 2) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		}
+		if (direction = 3) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		}
 	}
 
 }
