@@ -190,14 +190,13 @@ public class Maze : MonoBehaviour {
 
 	}
 	public void Generate () {
-		/*cells = new MazeCell[size.x, size.z];
+		cells = new MazeCell[size.x, size.z];
 		walls = new MazeWall[size.x, size.z];
-		GenV2 ();
-		*/
-		CreateMazeWall (new IntVector2 (row, col), 0);
-		CreateMazeWall (new IntVector2 (row, col), 1);
-		CreateMazeWall (new IntVector2 (row, col), 2);
-		CreateMazeWall (new IntVector2 (row, col), 3);
+		/*GenV2 ();*/
+		CreateMazeWall (new IntVector2 (10, 10), 0);
+		CreateMazeWall (new IntVector2 (10, 10), 1);
+		CreateMazeWall (new IntVector2 (10, 10), 2);
+		CreateMazeWall (new IntVector2 (10, 10), 3);
 	}
 
 	private void CreateCell (IntVector2 coordinates) {
@@ -224,16 +223,18 @@ public class Maze : MonoBehaviour {
 		newWall.coordinates = coordinates;
 		newWall.name = "Maze Wall " + coordinates.x + ", " + coordinates.z;
 		newWall.transform.parent = transform;
-		if (direction = 0) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		if (direction == 0) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f - 0.5f, 0.5f, coordinates.z - size.z * 0.5f );
+			newWall.transform.Rotate (0, 90, 0);
 		}
-		if (direction = 1) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		if (direction == 1) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f - 0.5f);
 		}
-		if (direction = 2) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		if (direction == 2) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+			newWall.transform.Rotate (0, 90, 0);
 		}
-		if (direction = 3) {
+		if (direction == 3) {
 			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
 		}
 	}
