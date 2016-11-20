@@ -22,6 +22,7 @@ GameObject:
   - 33: {fileID: 33000013751398540}
   - 64: {fileID: 64000013556555316}
   - 23: {fileID: 23000012947949208}
+  - 114: {fileID: 114000010466325666}
   m_Layer: 0
   m_Name: Maze wall
   m_TagString: Untagged
@@ -89,3 +90,17 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114000010466325666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013227515950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0386c9d4d0008465eb9664852f75dceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coordinates:
+    x: 0
+    z: 0
