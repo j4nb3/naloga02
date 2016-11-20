@@ -11,6 +11,9 @@ public class HealthBar : MonoBehaviour {
     public Slider Stamina;
     public Text HP;
     public Text ST;
+
+    public GameObject deathScreen;
+
     FirstPersonController fpc;
     float sprint, walk;
     bool regenST = true;
@@ -33,8 +36,10 @@ public class HealthBar : MonoBehaviour {
         regenST = true;
         if (Health.value <=0)
         {
-            Dead();
-            Application.LoadLevel(0); //naloži death sceno (ko bo) 
+            fpc.die();
+            Time.timeScale = 0.0f;
+            deathScreen.SetActive(true);
+            Cursor.visible = true;
         }
 
         if (Input.GetKey("left shift") && fpc.m_MoveDir.x!=0f)

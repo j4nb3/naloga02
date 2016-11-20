@@ -45,11 +45,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public GameObject pauseMenu;
 
         private bool isPaused;
+        private bool isDead;
+
+        public void die()
+        {
+            isDead = true;
+        }
 
         // Use this for initialization
         private void Start()
         {
             isPaused = false;
+            isDead = false;
             Cursor.visible = false;
             Time.timeScale = 1.0f;
 
@@ -90,16 +97,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
-            if (Input.GetKeyDown(KeyCode.Escape) && !isPaused) {
+            if (Input.GetKeyDown(KeyCode.Escape) && !isPaused && !isDead) {
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0.0f;
                 isPaused = true;
+                Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
             }
-            else if(Input.GetKeyDown(KeyCode.Escape) && isPaused) {
+            else if(Input.GetKeyDown(KeyCode.Escape) && isPaused && !isDead) {
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1.0f;
                 isPaused = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
         }
@@ -257,7 +266,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            if (isPaused) {
+            if (isPaused || isDead) {
                 return;
             }
             m_MouseLook.LookRotation (transform, m_Camera.transform);
