@@ -47,6 +47,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool isPaused;
         private bool isDead;
 
+        private bool stoppedRunning;
+        public Animator anim;
+
         public void die()
         {
             isDead = true;
@@ -55,6 +58,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Use this for initialization
         private void Start()
         {
+            anim = GetComponent<Animator>();
+
             isPaused = false;
             isDead = false;
             Cursor.visible = false;
@@ -110,6 +115,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 isPaused = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+            }
+
+            stoppedRunning = Input.GetKeyUp(KeyCode.LeftShift);
+
+            if (stoppedRunning == true)
+            {
+                m_IsWalking = true;
+            }
+            if(m_IsWalking == true)
+            {
+                stoppedRunning = false;
+            }
+
+            if (m_IsWalking == true)
+            {
+                anim.Play("Idle", -1);
+            }
+            else if(m_IsWalking == false)
+            {
+                anim.Play("Running", -1);
             }
         }
 
@@ -243,6 +268,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
             m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
