@@ -14,7 +14,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] public float m_WalkSpeed;
         [SerializeField] public float m_RunSpeed;
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
-        [SerializeField] private float m_JumpSpeed;
+        [SerializeField] public float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
         [SerializeField] private MouseLook m_MouseLook;
@@ -29,13 +29,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 
         private Camera m_Camera;
-        private bool m_Jump;
+        public bool m_Jump;
         private float m_YRotation;
         private Vector2 m_Input;
         public Vector3 m_MoveDir = Vector3.zero;
-        private CharacterController m_CharacterController;
+        public CharacterController m_CharacterController;
         private CollisionFlags m_CollisionFlags;
-        private bool m_PreviouslyGrounded;
+        public bool m_PreviouslyGrounded;
         private Vector3 m_OriginalCameraPosition;
         private float m_StepCycle;
         private float m_NextStep;
@@ -43,6 +43,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
 
         public GameObject pauseMenu;
+        public GameObject Tab;
 
         private bool isPaused;
         private bool isDead;
@@ -82,6 +83,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             RotateView();
+            Tab.SetActive(false);
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -117,6 +119,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 Cursor.visible = false;
             }
 
+            if(Input.GetKey("tab"))
+            {
+                Tab.SetActive(true);
+            }
             stoppedRunning = Input.GetKeyUp(KeyCode.LeftShift);
 
             if (stoppedRunning == true)
@@ -171,7 +177,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (m_Jump)
                 {
                     m_MoveDir.y = m_JumpSpeed;
-                    PlayJumpSound();
+                    if(m_JumpSpeed>0)
+                    {
+                        PlayJumpSound();
+                    }
                     m_Jump = false;
                     m_Jumping = true;
                 }
