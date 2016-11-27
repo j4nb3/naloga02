@@ -11,12 +11,18 @@ public class HealthBar : MonoBehaviour {
     public Slider Stamina;
     public Text HP;
     public Text ST;
+    public Text time;
+    public Text ura;
+    private float secondsCount;
+    private int minuteCount;
+    private int hourCount;
 
     public GameObject deathScreen;
 
     FirstPersonController fpc;
     float sprint, walk;
     bool regenST = true;
+    float skok;
     // Use this for initialization
     void Start () {
         Health.value = max_HP;
@@ -26,10 +32,19 @@ public class HealthBar : MonoBehaviour {
         fpc = GameObject.FindObjectOfType<FirstPersonController>();
         walk = (float)fpc.m_WalkSpeed;
         sprint = (float)fpc.m_RunSpeed;
+        skok = fpc.m_JumpSpeed;
+        secondsCount = 0.0f;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
+        PosodobiUro();
+        datum();
+        if (fpc.m_PreviouslyGrounded && !fpc.m_CharacterController.isGrounded)
+        {
+            Stamina.value -= 10;
+            regenST = false;
+        }
         HP.text = Health.value.ToString("0") + "/" + max_HP.ToString("0");
         ST.text = Stamina.value.ToString("0")+ "/" + max_ST.ToString("0");
         fpc.m_RunSpeed = sprint;
@@ -50,6 +65,31 @@ public class HealthBar : MonoBehaviour {
         if(Stamina.value<=0)
         {
             fpc.m_RunSpeed = walk;
+            fpc.m_JumpSpeed = -1;
+        }
+        if (Stamina.value >= 10)
+        {
+            fpc.m_JumpSpeed = skok;
+        }
+    }
+    void datum()
+    {
+        string datum = System.DateTime.Now.ToString("HH:mm:ss");
+        ura.text = datum;
+    }
+    public void PosodobiUro()
+    {
+        secondsCount += Time.deltaTime;
+        time.text = "ČAS IGRANJA"+"\n"+" "+hourCount + "h : " + minuteCount + "m : " + (int)secondsCount + "s";
+        if (secondsCount >= 60)
+        {
+            minuteCount++;
+            secondsCount = 0;
+        }
+        else if (minuteCount >= 60)
+        {
+            hourCount++;
+            minuteCount = 0;
         }
     }
     void Heal()
@@ -66,15 +106,34 @@ public class HealthBar : MonoBehaviour {
             Stamina.value += 5;
         }
     }
-    void Dead()
-    {
-        Debug.Log("Player Died");
-    }
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Fire"))
         {
             Health.value -= 1;
+        }   
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag=="HP")
+        {
+            if(Health.value!=max_HP)
+            {
+                Health.value += 100;
+                Destroy(other.gameObject);
+            }
+        }
+        if (other.gameObject.tag == "Stam")
+        {
+            if (Stamina.value != max_ST)
+            {
+                Stamina.value += 50;
+                Destroy(other.gameObject);
+            }
+        }
+        if(other.gameObject.tag=="Posast")
+        {
+            Health.value -= 50;
         }
     }
 
