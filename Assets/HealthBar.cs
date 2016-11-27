@@ -112,6 +112,14 @@ public class HealthBar : MonoBehaviour {
         {
             Health.value -= 1;
         }   
+        if(other.gameObject.CompareTag("HP1"))
+        {
+            Health.value += 2;
+        }
+        if (other.gameObject.CompareTag("ST1"))
+        {
+            Stamina.value += 2;
+        }
     }
     void OnTriggerEnter(Collider other)
     {
