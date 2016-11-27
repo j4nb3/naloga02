@@ -106,10 +106,6 @@ public class HealthBar : MonoBehaviour {
             Stamina.value += 5;
         }
     }
-    void Dead()
-    {
-        Debug.Log("Player Died");
-    }
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Fire"))
@@ -121,13 +117,19 @@ public class HealthBar : MonoBehaviour {
     {
         if (other.gameObject.tag=="HP")
         {
-            Health.value += 100;
-            Destroy(other.gameObject);
+            if(Health.value!=max_HP)
+            {
+                Health.value += 100;
+                Destroy(other.gameObject);
+            }
         }
         if (other.gameObject.tag == "Stam")
         {
-            Stamina.value += 50;
-            Destroy(other.gameObject);
+            if (Stamina.value != max_ST)
+            {
+                Stamina.value += 50;
+                Destroy(other.gameObject);
+            }
         }
         if(other.gameObject.tag=="Posast")
         {
