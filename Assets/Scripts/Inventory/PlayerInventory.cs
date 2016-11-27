@@ -23,6 +23,7 @@ public class PlayerInventory : MonoBehaviour {
     public void addItem(Item item) {
         if (items.Count < itemsMax) {
             items.Add(item);
+            print("Added item " + item);
             itemsChanged = true;
             print(items.Count + " items in inventory.");
         }
