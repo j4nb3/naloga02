@@ -115,6 +115,23 @@ public class HealthBar : MonoBehaviour {
         if (other.gameObject.CompareTag("Fire"))
         {
             Health.value -= 1;
+        }   
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag=="HP")
+        {
+            Health.value += 100;
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Stam")
+        {
+            Stamina.value += 50;
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag=="Posast")
+        {
+            Health.value -= 50;
         }
     }
 
