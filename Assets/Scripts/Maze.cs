@@ -29,6 +29,7 @@ public class Maze : MonoBehaviour {
 
 	private MazeCell[,] cells;
 	private MazeWall[,] walls;
+	private MazeWall[,] outerwalls;
 
 	private int[,] grid;
 
@@ -186,12 +187,22 @@ public class Maze : MonoBehaviour {
 				CreateCell (new IntVector2 (row, col));
 			}
 		}
-
+		for (int i = 0; i <= num_cols; i++) {
+			CreateOuterMazeWall (new IntVector2 (0, i), 1);
+			CreateOuterMazeWall (new IntVector2 (num_rows + 1, i), 1);
+		}
+		for (int i = 0; i <= num_rows; i++) {
+			if (i != 10) {
+				CreateOuterMazeWall (new IntVector2 (i, 0), 0);
+			}
+			CreateOuterMazeWall (new IntVector2 (i, num_cols+1), 0);
+		}
 
 	}
 	public void Generate () {
 		cells = new MazeCell[size.x, size.z];
 		walls = new MazeWall[size.x, size.z];
+		outerwalls = new MazeWall[size.x+2, size.z+2];
 		GenV2 ();
 	}
 
@@ -204,14 +215,26 @@ public class Maze : MonoBehaviour {
 		newCell.transform.localPosition =
 			new Vector3(coordinates.x - size.x * 0.5f , 0f, coordinates.z - size.z * 0.5f );
 	}
-	private void CreateWall (IntVector2 coordinates) {
+	private void CreateOuterMazeWall(IntVector2 coordinates, int direction){
 		MazeWall newWall = Instantiate(wallPrefab) as MazeWall;
-		walls[coordinates.x, coordinates.z] = newWall;
+		outerwalls[coordinates.x, coordinates.z] = newWall;
 		newWall.coordinates = coordinates;
 		newWall.name = "Maze Wall " + coordinates.x + ", " + coordinates.z;
 		newWall.transform.parent = transform;
-		newWall.transform.localPosition =
-			new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+		if (direction == 0) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f - 0.5f, 0.5f, coordinates.z - size.z * 0.5f - 1f);
+			newWall.transform.Rotate (0, 90, 0);
+		}
+		if (direction == 1) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f - 1f , 0.5f, coordinates.z - size.z * 0.5f - 0.5f);
+		}
+		if (direction == 2) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+			newWall.transform.Rotate (0, 90, 0);
+		}
+		if (direction == 3) {
+			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 1f , 0.5f, coordinates.z - size.z * 0.5f + 0.5f );
+		}
 	}
 	private void CreateMazeWall(IntVector2 coordinates, int direction){
 		MazeWall newWall = Instantiate(wallPrefab) as MazeWall;
