@@ -48,9 +48,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool isPaused;
         private bool isDead;
 
-        private bool stoppedRunning;
-        public Animator anim;
-
         public void die()
         {
             isDead = true;
@@ -59,8 +56,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Use this for initialization
         private void Start()
         {
-            anim = GetComponent<Animator>();
-
             isPaused = false;
             isDead = false;
             Cursor.visible = false;
@@ -123,25 +118,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 Tab.SetActive(true);
             }
-            stoppedRunning = Input.GetKeyUp(KeyCode.LeftShift);
 
-            if (stoppedRunning == true)
-            {
-                m_IsWalking = true;
-            }
-            if(m_IsWalking == true)
-            {
-                stoppedRunning = false;
-            }
-
-            if (m_IsWalking == true)
-            {
-                anim.Play("Idle", -1);
-            }
-            else if(m_IsWalking == false)
-            {
-                anim.Play("Running", -1);
-            }
         }
 
 
