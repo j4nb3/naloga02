@@ -48,6 +48,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool isPaused;
         private bool isDead;
 
+        public Animator theAnimator;
+
         public void die()
         {
             isDead = true;
@@ -118,6 +120,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 Tab.SetActive(true);
             }
+
+            if(m_IsWalking == true)
+            {
+                theAnimator.SetBool("IsRunning", false);
+            }
+            else
+            {
+                theAnimator.SetBool("IsRunning", true);
+            }
+        
 
         }
 

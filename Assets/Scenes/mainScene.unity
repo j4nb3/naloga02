@@ -7134,6 +7134,10 @@ Prefab:
       propertyPath: Tab
       value: 
       objectReference: {fileID: 85355980}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: theAnimator
+      value: 
+      objectReference: {fileID: 1697899739}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
@@ -8181,6 +8185,34 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.70941097
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1215163733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1215163734}
+  m_Layer: 8
+  m_Name: Fists
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1215163734
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1215163733}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1693468279}
+  m_RootOrder: 3
 --- !u!1 &1232653915
 GameObject:
   m_ObjectHideFlags: 0
@@ -15979,6 +16011,7 @@ Transform:
   - {fileID: 624730585}
   - {fileID: 969505913}
   - {fileID: 1326549647}
+  - {fileID: 1215163734}
   m_Father: {fileID: 32396620}
   m_RootOrder: 0
 --- !u!114 &1693468280
