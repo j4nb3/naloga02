@@ -20,6 +20,7 @@ public class ZombieAI : MonoBehaviour {
         if (animator) {
             m_transform.rotation = Quaternion.Slerp(m_transform.rotation, Quaternion.LookRotation(player.transform.position - m_transform.position - new Vector3(0,1,0)), m_rotationSpeed * Time.deltaTime);
             m_transform.position += m_transform.forward * animator.GetFloat("Walkspeed") * Time.deltaTime;
+            animator.SetFloat("DistanceToPlayer", Vector3.Distance(m_transform.position, player.transform.position));
         }
     }
 }
