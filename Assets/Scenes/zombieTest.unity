@@ -149,6 +149,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100088, guid: 8141a1e3f5562ba4d910d6c02d5d213c, type: 3}
+      propertyPath: m_Name
+      value: Zombie
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8141a1e3f5562ba4d910d6c02d5d213c, type: 3}
   m_IsPrefabParent: 0
@@ -257,7 +261,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012950214232, guid: 219f6b816672ca74e96851d0707c2275, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114000012317011456, guid: 219f6b816672ca74e96851d0707c2275,
         type: 2}
@@ -365,7 +369,7 @@ Prefab:
     - target: {fileID: 224000012597755292, guid: 38864c6f20854f24a81fa33800900b76,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224000012597755292, guid: 38864c6f20854f24a81fa33800900b76,
         type: 2}
@@ -659,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a23269741c584e409685cf83906c2b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1712663656}
 --- !u!1 &1090630315 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000012332853584, guid: 38864c6f20854f24a81fa33800900b76,
