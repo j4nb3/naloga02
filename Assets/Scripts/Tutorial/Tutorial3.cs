@@ -7,6 +7,6 @@ public class Tutorial3 : MonoBehaviour {
 
     void OnTriggerEnter()
     {
-        //UIscript.GetComponent<UnityEngine.UI.Text>().text = text;
+        TutorialText.changeDisplayText(text, 2);
     }
 }
