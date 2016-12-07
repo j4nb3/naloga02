@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 114000012057375902, guid: fb0dddad4c1ee4be0bceadc1d4cf301f,
     type: 2}
-  wallPrefab: {fileID: 114000012489522546, guid: f034645f65d5e4d669e07863d67f396a,
+  wallPrefab: {fileID: 114000012604765742, guid: 1f96deb91ed8b4ac8bc6a41365e4ced1,
     type: 2}
   generationStepDelay: 0
   size:

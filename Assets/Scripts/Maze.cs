@@ -184,18 +184,19 @@ public class Maze : MonoBehaviour {
 				if(cell_data[3] == 1){
 					CreateMazeWall (new IntVector2 (row, col), 3);
 				}
+				print (row + col);
 				CreateCell (new IntVector2 (row, col));
 			}
 		}
-		for (int i = 0; i <= num_cols; i++) {
+		for (int i = 0; i < num_cols; i++) {
 			CreateOuterMazeWall (new IntVector2 (0, i), 1);
-			CreateOuterMazeWall (new IntVector2 (num_rows + 1, i), 1);
+			CreateOuterMazeWall (new IntVector2 (num_rows, i), 1);
 		}
-		for (int i = 0; i <= num_rows; i++) {
+		for (int i = 0; i < num_rows; i++) {
 			if (i != 10) {
 				CreateOuterMazeWall (new IntVector2 (i, 0), 0);
 			}
-			CreateOuterMazeWall (new IntVector2 (i, num_cols+1), 0);
+			CreateOuterMazeWall (new IntVector2 (i, num_cols), 0);
 		}
 
 	}
@@ -213,7 +214,7 @@ public class Maze : MonoBehaviour {
 		newCell.name = "Maze Cell " + coordinates.x + ", " + coordinates.z;
 		newCell.transform.parent = transform;
 		newCell.transform.localPosition =
-			new Vector3(coordinates.x - size.x * 0.5f , 0f, coordinates.z - size.z * 0.5f );
+			new Vector3(coordinates.x*3 - size.x * 0.5f , 0f, coordinates.z*3 - size.z * 0.5f );
 	}
 	private void CreateOuterMazeWall(IntVector2 coordinates, int direction){
 		MazeWall newWall = Instantiate(wallPrefab) as MazeWall;
@@ -221,19 +222,13 @@ public class Maze : MonoBehaviour {
 		newWall.coordinates = coordinates;
 		newWall.name = "Maze Wall " + coordinates.x + ", " + coordinates.z;
 		newWall.transform.parent = transform;
+		print(newWall.transform.localScale.x);
 		if (direction == 0) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f - 0.5f, 0.5f, coordinates.z - size.z * 0.5f - 1f);
+			newWall.transform.localPosition = new Vector3(coordinates.x*3 - size.x * 0.5f, newWall.transform.localScale.y/2, coordinates.z*3 - size.z * 0.5f-1.5f);
 			newWall.transform.Rotate (0, 90, 0);
 		}
 		if (direction == 1) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f - 1f , 0.5f, coordinates.z - size.z * 0.5f - 0.5f);
-		}
-		if (direction == 2) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
-			newWall.transform.Rotate (0, 90, 0);
-		}
-		if (direction == 3) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 1f , 0.5f, coordinates.z - size.z * 0.5f + 0.5f );
+			newWall.transform.localPosition = new Vector3(coordinates.x*3 - size.x * 0.5f - 1.5f, newWall.transform.localScale.y/2, coordinates.z*3 - size.z * 0.5f );
 		}
 	}
 	private void CreateMazeWall(IntVector2 coordinates, int direction){
@@ -243,18 +238,18 @@ public class Maze : MonoBehaviour {
 		newWall.name = "Maze Wall " + coordinates.x + ", " + coordinates.z;
 		newWall.transform.parent = transform;
 		if (direction == 0) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f - 0.5f, 0.5f, coordinates.z - size.z * 0.5f );
+						newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f - 0.5f + newWall.transform.localScale.x/2, newWall.transform.localScale.y/2-100, coordinates.z - size.z * 0.5f+ newWall.transform.localScale.z/2 );
 			newWall.transform.Rotate (0, 90, 0);
 		}
 		if (direction == 1) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f - 0.5f);
+						newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f+ newWall.transform.localScale.x/2, newWall.transform.localScale.y/2-100, coordinates.z - size.z * 0.5f - 0.5f+ newWall.transform.localScale.z/2);
 		}
 		if (direction == 2) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f , 0.5f, coordinates.z - size.z * 0.5f );
+						newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f+ newWall.transform.localScale.x/2 , newWall.transform.localScale.y/2-100, coordinates.z - size.z * 0.5f + newWall.transform.localScale.z/2);
 			newWall.transform.Rotate (0, 90, 0);
 		}
 		if (direction == 3) {
-			newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f , 0.5f, coordinates.z - size.z * 0.5f + 0.5f );
+						newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f+ newWall.transform.localScale.x/2-100 , newWall.transform.localScale.y/2, coordinates.z - size.z * 0.5f + 0.5f + newWall.transform.localScale.z/2);
 		}
 	}
 
