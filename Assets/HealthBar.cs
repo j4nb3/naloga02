@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 using System.Collections;
 
-
 public class HealthBar : MonoBehaviour {
     public int max_HP = 500;
     public int max_ST = 300;
@@ -71,6 +70,9 @@ public class HealthBar : MonoBehaviour {
         {
             fpc.m_JumpSpeed = skok;
         }
+
+        //Health.value
+        //Stamina.value
     }
     void datum()
     {

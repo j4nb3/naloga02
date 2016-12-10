@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.UI;
+using System.IO;
 
 public class Game : MonoBehaviour {
 
 	public Maze mazePrefab;
-
 	private Maze mazeInstance;
 
 	private void Start () {
