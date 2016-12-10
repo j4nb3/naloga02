@@ -3,13 +3,29 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class SaveGame : MonoBehaviour {
+    public Text shranjeno;
     public HealthBar health;
     public CrossScript ammo;
     public float PositionX, PositionY, PositionZ;
     public float hp,st;
     int noter,reload;
 	// Use this for initialization
+    IEnumerator Cakaj(int x)
+    {
+        shranjeno.text = "";
+        if (x == 1)
+        {
+            shranjeno.text = "Game Saved!";
+        }
+        else if (x == 2)
+        {
+            shranjeno.text = "Loaded";
+        }
+        yield return new WaitForSeconds(2.0f);
+        shranjeno.text = "";
+    }
 	void Start () {
+        shranjeno.text = "";
 	}
 	
 	// Update is called once per frame
@@ -33,6 +49,7 @@ public class SaveGame : MonoBehaviour {
             PlayerPrefs.SetFloat("X", PositionX);
             PlayerPrefs.SetFloat("Y", PositionY);
             PlayerPrefs.SetFloat("Z", PositionZ);
+            StartCoroutine(Cakaj(1));
         }
 
         if (Input.GetKey(KeyCode.F9))
@@ -43,6 +60,7 @@ public class SaveGame : MonoBehaviour {
             ammo.trenutno_reload = PlayerPrefs.GetInt("Reload");
 
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
+            StartCoroutine(Cakaj(2));
         }
 	
 	}
