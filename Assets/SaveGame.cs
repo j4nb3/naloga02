@@ -6,8 +6,8 @@ public class SaveGame : MonoBehaviour {
     public Text shranjeno;
     public HealthBar health;
     public CrossScript ammo;
-    public float PositionX, PositionY, PositionZ;
-    public float hp,st;
+    private float PositionX, PositionY, PositionZ;
+    private float hp,st;
     int noter,reload;
 	// Use this for initialization
     IEnumerator Cakaj(int x)
@@ -26,7 +26,8 @@ public class SaveGame : MonoBehaviour {
     }
 	void Start () {
         shranjeno.text = "";
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
