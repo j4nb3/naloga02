@@ -10,7 +10,11 @@ public class WeaponSystem : MonoBehaviour {
     int hit01Streak = 0;
     int hit02Streak = 0;
 
+    public int damage = 50;
     float damageDelay = 0.6f;
+
+    public float distance;
+    public float maxDistance = 1.5f;
 
 	void Awake () {
         SelectWeapon(0);
@@ -71,6 +75,7 @@ public class WeaponSystem : MonoBehaviour {
             SelectWeapon(currentWeapon);
         }
 
+        //attacking
         if(Input.GetButtonDown("Fire1"))
         {
             StartCoroutine(AttackDamage());
@@ -125,6 +130,18 @@ public class WeaponSystem : MonoBehaviour {
         }
         
         yield return new WaitForSeconds(damageDelay);
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray, out hit))
+        {
+            distance = hit.distance;
+            if(distance < maxDistance)
+            {
+                hit.transform.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
+                Debug.Log("HIYAAAAAAAAAAAAAAA");
+            }
+        }
 
         theAnimator.SetBool("Hit01", false);
         theAnimator.SetBool("Hit02", false);
