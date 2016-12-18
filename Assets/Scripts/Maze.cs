@@ -30,6 +30,7 @@ public class Maze : MonoBehaviour {
 	private MazeCell[,] cells;
 	private MazeWall[,] walls;
 	private MazeWall[,] outerwalls;
+	private MazeCell[,] strop;
 
 	private int[,] grid;
 
@@ -202,6 +203,7 @@ public class Maze : MonoBehaviour {
 	}
 	public void Generate () {
 		cells = new MazeCell[size.x, size.z];
+		strop = new MazeCell[size.x, size.z];
 		walls = new MazeWall[size.x, size.z];
 		outerwalls = new MazeWall[size.x+2, size.z+2];
 		GenV2 ();
@@ -215,6 +217,14 @@ public class Maze : MonoBehaviour {
 		newCell.transform.parent = transform;
 		newCell.transform.localPosition =
 			new Vector3(coordinates.x*3 - size.x * 0.5f , 0f, coordinates.z*3 - size.z * 0.5f );
+
+		MazeCell newCell1 = Instantiate(cellPrefab) as MazeCell;
+		strop[coordinates.x, coordinates.z] = newCell1;
+		newCell1.coordinates = coordinates;
+		newCell1.name = "Maze Cell " + coordinates.x + ", " + coordinates.z;
+		newCell1.transform.parent = transform;
+		newCell1.transform.localPosition =
+			new Vector3(coordinates.x*3 - size.x * 0.5f , 2.5f, coordinates.z*3 - size.z * 0.5f);
 	}
 	private void CreateOuterMazeWall(IntVector2 coordinates, int direction){
 		MazeWall newWall = Instantiate(wallPrefab) as MazeWall;
