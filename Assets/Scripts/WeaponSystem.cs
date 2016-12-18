@@ -138,8 +138,11 @@ public class WeaponSystem : MonoBehaviour {
             distance = hit.distance;
             if(distance < maxDistance)
             {
-                hit.transform.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
-                Debug.Log("HIYAAAAAAAAAAAAAAA");
+                if(hit.collider.tag == "Dummy")
+                {
+                    hit.transform.SendMessageUpwards("ApplyDamage", damage);
+                    Debug.Log("HIYAAAAAAAAAAAAAAA");
+                }
             }
         }
 

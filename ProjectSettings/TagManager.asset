@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Stam
   - HP
+  - Fire
+  - PickUp
+  - Ammo
+  - HP1
+  - ST1
+  - InventorySlot
+  - Dummy
   layers:
   - Default
   - TransparentFX
