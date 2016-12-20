@@ -8,8 +8,8 @@ public class CrossScript : MonoBehaviour {
     public RawImage levo;
     public RawImage desno;
 
-    private int trenutno_noter;
-    private int trenutno_reload;
+    public int trenutno_noter;
+    public int trenutno_reload;
     public Text noter;
     public Text reload;
 

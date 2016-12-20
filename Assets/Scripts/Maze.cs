@@ -24,8 +24,9 @@ public static class Tuple
 
 public class Maze : MonoBehaviour {
 
-	public MazeCell cellPrefab;
+	public MazeCell floorPrefab;
 	public MazeWall wallPrefab;
+	public MazeCell stropPrefab;
 
 	private MazeCell[,] cells;
 	private MazeWall[,] walls;
@@ -173,16 +174,16 @@ public class Maze : MonoBehaviour {
 		for(int row=0; row<num_rows; row++){
 			for(int col=0; col<num_cols; col++){
 				int[] cell_data = new int[5] {M [row, col, 0], M [row, col, 1], M [row, col, 2], M [row, col, 3], M [row, col, 4]};
-				if(cell_data[0] == 1){
+				if(cell_data[0] == 0){
 					CreateMazeWall (new IntVector2 (row, col), 0);
 				}
-				if(cell_data[1] == 1){
+				if(cell_data[1] == 0){
 					CreateMazeWall (new IntVector2 (row, col), 1);
 				}
-				if(cell_data[2] == 1){
+				if(cell_data[2] == 0){
 					CreateMazeWall (new IntVector2 (row, col), 2);
 				}
-				if(cell_data[3] == 1){
+				if(cell_data[3] == 0){
 					CreateMazeWall (new IntVector2 (row, col), 3);
 				}
 				print (row + col);
@@ -210,7 +211,7 @@ public class Maze : MonoBehaviour {
 	}
 
 	private void CreateCell (IntVector2 coordinates) {
-		MazeCell newCell = Instantiate(cellPrefab) as MazeCell;
+		MazeCell newCell = Instantiate(floorPrefab) as MazeCell;
 		cells[coordinates.x, coordinates.z] = newCell;
 		newCell.coordinates = coordinates;
 		newCell.name = "Maze Cell " + coordinates.x + ", " + coordinates.z;
@@ -218,13 +219,14 @@ public class Maze : MonoBehaviour {
 		newCell.transform.localPosition =
 			new Vector3(coordinates.x*3 - size.x * 0.5f , 0f, coordinates.z*3 - size.z * 0.5f );
 
-		MazeCell newCell1 = Instantiate(cellPrefab) as MazeCell;
-		strop[coordinates.x, coordinates.z] = newCell1;
-		newCell1.coordinates = coordinates;
-		newCell1.name = "Maze Cell " + coordinates.x + ", " + coordinates.z;
-		newCell1.transform.parent = transform;
-		newCell1.transform.localPosition =
-			new Vector3(coordinates.x*3 - size.x * 0.5f , 2.5f, coordinates.z*3 - size.z * 0.5f);
+		//MazeCell newCell1 = Instantiate(stropPrefab) as MazeCell;
+		//strop[coordinates.x, coordinates.z] = newCell1;
+		//newCell1.coordinates = coordinates;
+		//newCell1.name = "Maze Cell " + coordinates.x + ", " + coordinates.z;
+		//newCell1.transform.parent = transform;
+		//newCell1.transform.localPosition =
+		//	new Vector3(coordinates.x*3 - size.x * 0.5f , 30f, coordinates.z*3 - size.z * 0.5f);
+		//newCell1.transform.Rotate (-180, -180 , -180);
 	}
 	private void CreateOuterMazeWall(IntVector2 coordinates, int direction){
 		MazeWall newWall = Instantiate(wallPrefab) as MazeWall;
@@ -248,19 +250,19 @@ public class Maze : MonoBehaviour {
 		newWall.name = "Maze Wall " + coordinates.x + ", " + coordinates.z;
 		newWall.transform.parent = transform;
 		if (direction == 0) {
-						newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f - 0.5f + newWall.transform.localScale.x/2, newWall.transform.localScale.y/2-100, coordinates.z - size.z * 0.5f+ newWall.transform.localScale.z/2 );
+			newWall.transform.localPosition = new Vector3(coordinates.x*3 - size.x * 0.5f, newWall.transform.localScale.y/2, coordinates.z*3 - size.z * 0.5f -1.5f);
 			newWall.transform.Rotate (0, 90, 0);
 		}
-		if (direction == 1) {
-						newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f+ newWall.transform.localScale.x/2, newWall.transform.localScale.y/2-100, coordinates.z - size.z * 0.5f - 0.5f+ newWall.transform.localScale.z/2);
+		if(direction == 1) {
+						newWall.transform.localPosition = new Vector3(coordinates.x*3 - size.x * 0.5f - 1.5f, newWall.transform.localScale.y/2, coordinates.z*3 - size.z * 0.5f );
 		}
-		if (direction == 2) {
-						newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f+ newWall.transform.localScale.x/2 , newWall.transform.localScale.y/2-100, coordinates.z - size.z * 0.5f + newWall.transform.localScale.z/2);
-			newWall.transform.Rotate (0, 90, 0);
-		}
-		if (direction == 3) {
-						newWall.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f+ newWall.transform.localScale.x/2-100 , newWall.transform.localScale.y/2, coordinates.z - size.z * 0.5f + 0.5f + newWall.transform.localScale.z/2);
-		}
+		//if (direction == 2) {
+		//				newWall.transform.localPosition = new Vector3(coordinates.x*3 - size.x * 0.5f + 0.5f+ newWall.transform.localScale.x/2 , newWall.transform.localScale.y/2, coordinates.z*3 - size.z * 0.5f + newWall.transform.localScale.z/2);
+		//	newWall.transform.Rotate (0, 90, 0);
+		//}
+		//if (direction == 3) {
+		//				newWall.transform.localPosition = new Vector3(coordinates.x*3 - size.x * 0.5f+ newWall.transform.localScale.x/2 , newWall.transform.localScale.y/2, coordinates.z*3 - size.z * 0.5f + 0.5f + newWall.transform.localScale.z/2);
+		//}
 	}
 
 }
