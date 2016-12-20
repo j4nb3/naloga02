@@ -3,12 +3,14 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class SaveGame : MonoBehaviour {
+    public int shrani=3;
     public Text shranjeno;
     public HealthBar health;
     public CrossScript ammo;
     private float PositionX, PositionY, PositionZ;
+    private float PositionZX, PositionZY, PositionZZ;
     private float hp,st;
-    int noter,reload;
+    int noter,reload,st_shranitev=0;
 	// Use this for initialization
     IEnumerator Cakaj(int x)
     {
@@ -21,12 +23,15 @@ public class SaveGame : MonoBehaviour {
         {
             shranjeno.text = "Loaded";
         }
+        else if(x==3)
+        {
+            shranjeno.text = "Ni mogoce vec shraniti";
+        }
         yield return new WaitForSeconds(2.0f);
         shranjeno.text = "";
     }
 	void Start () {
         shranjeno.text = "";
-
     }
 	
 	// Update is called once per frame
@@ -40,20 +45,36 @@ public class SaveGame : MonoBehaviour {
         PositionY = gameObject.transform.position.y;
         PositionZ = gameObject.transform.position.z;
 
-        if (Input.GetKey(KeyCode.F5))
-        {
-            PlayerPrefs.SetFloat("HP", hp);
-            PlayerPrefs.SetFloat("ST", st);
-            PlayerPrefs.SetInt("Noter", noter);
-            PlayerPrefs.SetInt("Reload", reload);
+        PositionZX= GameObject.Find("Zombie").transform.position.x;
+        PositionZY = GameObject.Find("Zombie").transform.position.y;
+        PositionZZ = GameObject.Find("Zombie").transform.position.z;
 
-            PlayerPrefs.SetFloat("X", PositionX);
-            PlayerPrefs.SetFloat("Y", PositionY);
-            PlayerPrefs.SetFloat("Z", PositionZ);
-            StartCoroutine(Cakaj(1));
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            if(st_shranitev>=shrani)
+            {
+                StartCoroutine(Cakaj(3));
+            }
+            else
+            {
+                PlayerPrefs.SetFloat("HP", hp);
+                PlayerPrefs.SetFloat("ST", st);
+                PlayerPrefs.SetInt("Noter", noter);
+                PlayerPrefs.SetInt("Reload", reload);
+
+                PlayerPrefs.SetFloat("X", PositionX);
+                PlayerPrefs.SetFloat("Y", PositionY);
+                PlayerPrefs.SetFloat("Z", PositionZ);
+
+                PlayerPrefs.SetFloat("ZX", PositionZX);
+                PlayerPrefs.SetFloat("ZY", PositionZY);
+                PlayerPrefs.SetFloat("ZZ", PositionZZ);
+                StartCoroutine(Cakaj(1));
+            }
+            st_shranitev++;
         }
 
-        if (Input.GetKey(KeyCode.F9))
+        if (Input.GetKeyDown(KeyCode.F9))
         {
             health.Health.value=PlayerPrefs.GetFloat("HP");
             health.Stamina.value = PlayerPrefs.GetFloat("ST");
@@ -61,6 +82,7 @@ public class SaveGame : MonoBehaviour {
             ammo.trenutno_reload = PlayerPrefs.GetInt("Reload");
 
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
+            GameObject.Find("Zombie").transform.position = new Vector3(PlayerPrefs.GetFloat("ZX"), PlayerPrefs.GetFloat("ZY"), PlayerPrefs.GetFloat("ZZ"));
             StartCoroutine(Cakaj(2));
         }
 	

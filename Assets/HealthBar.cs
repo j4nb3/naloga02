@@ -15,13 +15,15 @@ public class HealthBar : MonoBehaviour {
     private float secondsCount;
     private int minuteCount;
     private int hourCount;
-
     public GameObject deathScreen;
+
+    public AudioSource source;
 
     FirstPersonController fpc;
     float sprint, walk;
     bool regenST = true;
     float skok;
+    bool predvajaj=false;
     // Use this for initialization
     void Start () {
         Health.value = max_HP;
@@ -33,7 +35,7 @@ public class HealthBar : MonoBehaviour {
         sprint = (float)fpc.m_RunSpeed;
         skok = fpc.m_JumpSpeed;
         secondsCount = 0.0f;
-    }
+}
 
 	// Update is called once per frame
 	void Update () {
@@ -70,9 +72,12 @@ public class HealthBar : MonoBehaviour {
         {
             fpc.m_JumpSpeed = skok;
         }
-
         //Health.value
         //Stamina.value
+        if(predvajaj==true)
+        {
+            StartCoroutine(Zvok());
+        }
     }
     void datum()
     {
@@ -94,6 +99,13 @@ public class HealthBar : MonoBehaviour {
             minuteCount = 0;
         }
     }
+    IEnumerator Zvok()
+    {
+        predvajaj = false;
+        source.Play();
+        yield return new WaitForSeconds(1.0f);
+        predvajaj = true;
+    }
     void Heal()
     {
         if (Health.value != max_HP && Health.value > 0)
@@ -113,13 +125,32 @@ public class HealthBar : MonoBehaviour {
         if (other.gameObject.CompareTag("Fire"))
         {
             Health.value -= 1;
-        }   
+        }
+        if (other.gameObject.tag == "HP1")
+        {
+            Health.value += 1;
+        }
+        if (other.gameObject.tag == "ST1")
+        {
+            Stamina.value += 1;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Fire")
+        {
+            predvajaj = false;
+        }
     }
     void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag=="Fire")
+        {
+            predvajaj = true;
+        }
         if (other.gameObject.tag=="HP")
         {
-            if(Health.value!=max_HP)
+            if (Health.value!=max_HP)
             {
                 Health.value += 100;
                 Destroy(other.gameObject);
