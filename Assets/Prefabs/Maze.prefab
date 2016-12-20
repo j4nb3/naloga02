@@ -55,7 +55,7 @@ MonoBehaviour:
     type: 2}
   wallPrefab: {fileID: 114000012489522546, guid: f034645f65d5e4d669e07863d67f396a,
     type: 2}
-  stropPrefab: {fileID: 114000011986120274, guid: e40a58100749b480193de06452497778,
+  stropPrefab: {fileID: 114000013755418538, guid: f5dce805aa05f42e091c4ce5015625c4,
     type: 2}
   generationStepDelay: 0
   size:
