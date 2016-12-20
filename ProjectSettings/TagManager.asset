@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Stam
+  - HP
+  - Fire
+  - PickUp
+  - Ammo
+  - HP1
+  - ST1
+  - InventorySlot
+  - Dummy
   layers:
   - Default
   - TransparentFX
