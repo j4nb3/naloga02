@@ -659,6 +659,11 @@ Prefab:
       propertyPath: nodeRadius
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010011145382, guid: c1bd081509ce26941ae70e396a5aa122,
+        type: 2}
+      propertyPath: drawGizmos
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1bd081509ce26941ae70e396a5aa122, type: 2}
   m_IsPrefabParent: 0

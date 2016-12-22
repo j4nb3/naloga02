@@ -18,7 +18,7 @@ public class ZombieAI : MonoBehaviour {
     void OnAnimatorMove() {
         Animator animator = GetComponent<Animator>();
 
-        if (animator) {
+        if (animator && grid.path != null && grid.path.Count >= 2) {
             //m_transform.rotation = Quaternion.Slerp(m_transform.rotation, Quaternion.LookRotation(player.transform.position - m_transform.position - new Vector3(0,1,0)), m_rotationSpeed * Time.deltaTime);
             m_transform.rotation = Quaternion.Slerp(m_transform.rotation, Quaternion.LookRotation(grid.path[1].worldPosition - m_transform.position), m_rotationSpeed * Time.deltaTime);
             Vector3 newPosition = m_transform.position + m_transform.forward * animator.GetFloat("Walkspeed") * Time.deltaTime;
