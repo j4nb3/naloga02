@@ -17,6 +17,7 @@ public class CrossScript : MonoBehaviour
     public AudioSource strel;
     public AudioSource rel;
     public AudioSource metek;
+
     // Use this for initialization
     void Start()
     {
@@ -41,6 +42,7 @@ public class CrossScript : MonoBehaviour
                 desno.GetComponent<Animator>().enabled = true;
                 Invoke("CakajAnim", 0.08f);
                 StartCoroutine(Drop());
+
             }
             else
             {

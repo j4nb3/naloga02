@@ -44,7 +44,6 @@ public class HealthBar : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(Camera.main.fieldOfView);
         if (Input.GetMouseButton(1))
         {
             Camera.main.fieldOfView = 50;
@@ -86,8 +85,6 @@ public class HealthBar : MonoBehaviour {
         {
             fpc.m_JumpSpeed = skok;
         }
-        //Health.value
-        //Stamina.value
         if(predvajaj==true)
         {
             if(Health.value!= max_HP || Stamina.value!= max_ST)
