@@ -20,6 +20,8 @@ public class HealthBar : MonoBehaviour {
     public AudioSource source;
     public AudioSource regen;
 
+    float baseFOV;
+
     FirstPersonController fpc;
     float sprint, walk;
     bool regenST = true;
@@ -37,10 +39,20 @@ public class HealthBar : MonoBehaviour {
         sprint = (float)fpc.m_RunSpeed;
         skok = fpc.m_JumpSpeed;
         secondsCount = 0.0f;
+        baseFOV = Camera.main.fieldOfView;
 }
 
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(Camera.main.fieldOfView);
+        if (Input.GetMouseButton(1))
+        {
+            Camera.main.fieldOfView = 50;
+        }
+        else
+        {
+            Camera.main.fieldOfView = baseFOV;
+        }
         PosodobiUro();
         datum();
         if (fpc.m_PreviouslyGrounded && !fpc.m_CharacterController.isGrounded)

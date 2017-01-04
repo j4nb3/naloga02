@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class CrossScript : MonoBehaviour {
+public class CrossScript : MonoBehaviour
+{
     public RawImage gor;
     public RawImage dol;
     public RawImage levo;
@@ -13,76 +14,106 @@ public class CrossScript : MonoBehaviour {
     public Text noter;
     public Text reload;
 
+    public AudioSource strel;
+    public AudioSource rel;
+    public AudioSource metek;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         trenutno_noter = 0;
         trenutno_reload = 20;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         noter.text = "" + trenutno_noter;
         reload.text = "" + trenutno_reload;
         if (Input.GetMouseButtonDown(0))
         {
-            if(trenutno_noter > 0)
+            if (trenutno_noter > 0)
             {
+                strel.Play();
                 trenutno_noter--;
                 gor.GetComponent<Animator>().enabled = true;
                 dol.GetComponent<Animator>().enabled = true;
                 levo.GetComponent<Animator>().enabled = true;
                 desno.GetComponent<Animator>().enabled = true;
                 Invoke("CakajAnim", 0.08f);
+                StartCoroutine(Drop());
             }
             else
             {
-                if(trenutno_reload>0)
+                if (trenutno_reload > 0)
                 {
-                    if(trenutno_reload>24)
+                    if (trenutno_reload > 24)
                     {
                         if (trenutno_noter == 0)
                         {
                             trenutno_noter += 24;
                             trenutno_reload -= 24;
+                            rel.Play();
                         }
                         else
                         {
                             trenutno_reload = trenutno_reload - (24 - trenutno_noter);
                             trenutno_noter = trenutno_noter + (24 - trenutno_noter);
+                            rel.Play();
                         }
                     }
-                    else if(trenutno_reload<24)
+                    else if (trenutno_reload < 24 && trenutno_reload > 0)
                     {
-                        trenutno_noter += trenutno_reload;
-                        trenutno_reload = 0;
+                        if (trenutno_noter == 0)
+                        {
+                            trenutno_noter = trenutno_reload;
+                            trenutno_reload = 0;
+                            rel.Play();
+                        }
+                        else if (trenutno_noter < 24)
+                        {
+                            trenutno_reload = trenutno_reload - (24 - trenutno_noter);
+                            trenutno_noter = trenutno_noter + (24 - trenutno_noter);
+                            rel.Play();
+                        }
                     }
                 }
             }
         }
-        if(Input.GetKeyDown(KeyCode.R))
-        {          
+        if (Input.GetKeyDown(KeyCode.R))
+        {
             if (trenutno_reload > 24)
             {
-                if(trenutno_noter==0)
+                if (trenutno_noter == 0)
                 {
                     trenutno_noter += 24;
                     trenutno_reload -= 24;
+                    rel.Play();
                 }
                 else
                 {
                     trenutno_reload = trenutno_reload - (24 - trenutno_noter);
                     trenutno_noter = trenutno_noter + (24 - trenutno_noter);
+                    rel.Play();
                 }
             }
-            else if (trenutno_reload < 24)
+            else if (trenutno_reload < 24 && trenutno_reload > 0)
             {
-                trenutno_noter += trenutno_reload;
-                trenutno_reload = 0;
+                if (trenutno_noter == 0)
+                {
+                    trenutno_noter = trenutno_reload;
+                    trenutno_reload = 0;
+                    rel.Play();
+                }
+                else if (trenutno_noter < 24)
+                {
+                    trenutno_reload = trenutno_reload - (24 - trenutno_noter);
+                    trenutno_noter = trenutno_noter + (24 - trenutno_noter);
+                    rel.Play();
+                }
             }
         }
     }
+
     void CakajAnim()
     {
         gor.GetComponent<Animator>().enabled = false;
@@ -100,5 +131,10 @@ public class CrossScript : MonoBehaviour {
         {
             trenutno_reload += 10;
         }
+    }
+    IEnumerator Drop()
+    {
+        yield return new WaitForSeconds(strel.clip.length);
+        metek.Play();
     }
 }

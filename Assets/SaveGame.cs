@@ -11,7 +11,10 @@ public class SaveGame : MonoBehaviour {
     private float PositionZX, PositionZY, PositionZZ;
     private float hp,st;
     int noter,reload,st_shranitev=0;
-	// Use this for initialization
+
+    public AudioSource load;
+    public AudioSource save;
+    // Use this for initialization
     IEnumerator Cakaj(int x)
     {
         shranjeno.text = "";
@@ -57,6 +60,7 @@ public class SaveGame : MonoBehaviour {
             }
             else
             {
+                load.Play();
                 PlayerPrefs.SetFloat("HP", hp);
                 PlayerPrefs.SetFloat("ST", st);
                 PlayerPrefs.SetInt("Noter", noter);
@@ -76,6 +80,7 @@ public class SaveGame : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.F9))
         {
+            save.Play();
             health.Health.value=PlayerPrefs.GetFloat("HP");
             health.Stamina.value = PlayerPrefs.GetFloat("ST");
             ammo.trenutno_noter = PlayerPrefs.GetInt("Noter");
