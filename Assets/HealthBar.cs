@@ -18,12 +18,14 @@ public class HealthBar : MonoBehaviour {
     public GameObject deathScreen;
 
     public AudioSource source;
+    public AudioSource regen;
 
     FirstPersonController fpc;
     float sprint, walk;
     bool regenST = true;
     float skok;
-    bool predvajaj=false;
+    bool predvajaj=false,predvajaj1=false;
+    bool zvok1=true, zvok2=true;
     // Use this for initialization
     void Start () {
         Health.value = max_HP;
@@ -76,8 +78,17 @@ public class HealthBar : MonoBehaviour {
         //Stamina.value
         if(predvajaj==true)
         {
-            StartCoroutine(Zvok());
+            if(Health.value!= max_HP || Stamina.value!= max_ST)
+            {
+                StartCoroutine(Zvok());
+            }           
         }
+        if (predvajaj1 == true)
+        {
+
+            StartCoroutine(Reg());
+        }
+
     }
     void datum()
     {
@@ -104,7 +115,28 @@ public class HealthBar : MonoBehaviour {
         predvajaj = false;
         source.Play();
         yield return new WaitForSeconds(1.0f);
-        predvajaj = true;
+        if(zvok1==false)
+        {
+            predvajaj = false;
+        }
+        else
+        {
+            predvajaj = true;
+        }
+    }
+    IEnumerator Reg()
+    {
+        predvajaj1 = false;
+        regen.Play();
+        yield return new WaitForSeconds(1.5f);
+        if (zvok2 == false)
+        {
+            predvajaj1 = false;
+        }
+        else
+        {
+            predvajaj1 = true;
+        }
     }
     void Heal()
     {
@@ -140,6 +172,17 @@ public class HealthBar : MonoBehaviour {
         if(other.gameObject.tag == "Fire")
         {
             predvajaj = false;
+            zvok1 = false;
+        }
+        if (other.gameObject.tag == "HP1")
+        {
+            predvajaj1 = false;
+            zvok2 = false;
+        }
+        if (other.gameObject.tag == "ST1")
+        {
+            predvajaj1 = false;
+            zvok2 = false;
         }
     }
     void OnTriggerEnter(Collider other)
@@ -147,6 +190,17 @@ public class HealthBar : MonoBehaviour {
         if(other.gameObject.tag=="Fire")
         {
             predvajaj = true;
+            zvok1 = true;
+        }
+        if (other.gameObject.tag == "HP1")
+        {
+            predvajaj1 = true;
+            zvok2 = true;
+        }
+        if (other.gameObject.tag == "ST1")
+        {
+            predvajaj1 = true;
+            zvok2 = true;
         }
         if (other.gameObject.tag=="HP")
         {
