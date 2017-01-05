@@ -23,7 +23,7 @@ GameObject:
   - 65: {fileID: 65000013653209122}
   - 23: {fileID: 23000010329084780}
   m_Layer: 0
-  m_Name: Bullet Hole
+  m_Name: bulletHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

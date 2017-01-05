@@ -477,6 +477,7 @@ MonoBehaviour:
   strel: {fileID: 1365158038}
   rel: {fileID: 437240178}
   metek: {fileID: 620468976}
+  prefab: {fileID: 1000011825623996, guid: 24288e39900e03140b1582ec91549fb1, type: 2}
 --- !u!1 &120276439
 GameObject:
   m_ObjectHideFlags: 0
