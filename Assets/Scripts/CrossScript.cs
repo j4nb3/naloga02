@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class CrossScript : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class CrossScript : MonoBehaviour
     public AudioSource strel;
     public AudioSource rel;
     public AudioSource metek;
+
+    public GameObject prefab;
 
     // Use this for initialization
     void Start()
@@ -40,6 +43,13 @@ public class CrossScript : MonoBehaviour
                 dol.GetComponent<Animator>().enabled = true;
                 levo.GetComponent<Animator>().enabled = true;
                 desno.GetComponent<Animator>().enabled = true;
+
+                RaycastHit hit = new RaycastHit();
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)) {
+                    //Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red, 5.0f);
+                    Instantiate(prefab, hit.point, Quaternion.LookRotation(hit.normal));
+                }
+
                 Invoke("CakajAnim", 0.08f);
                 StartCoroutine(Drop());
 
