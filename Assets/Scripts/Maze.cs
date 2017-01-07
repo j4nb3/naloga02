@@ -65,6 +65,7 @@ public class Maze : MonoBehaviour {
 		if (isValid (x, y+2) && grid[x,y+2] == 1) {
 			rtn.Add (new int[2] {x, y+2});
 		}
+		print (rtn.Count);
 		return rtn;
 	}
 	private List<int[]> neighborCells(int[,] grid, int[] vertex){
@@ -83,6 +84,7 @@ public class Maze : MonoBehaviour {
 		if (isValid (x, y+2) && grid[x,y+2] == 1) {
 			rtn.Add (new int[2] {x, y+2});
 		}
+		print (rtn.Count);
 		return rtn;
 	}
 	//http://stackoverflow.com/questions/29739751/implementing-a-randomly-generated-maze-using-prims-algorithm Implementation
@@ -99,6 +101,7 @@ public class Maze : MonoBehaviour {
 		V.AddRange (frontierCells (grid, V [0]));
 		V.RemoveAt (0);
 		while (V.Count > 0) {
+			print (V.Count);
 			int[] vertex = V[UnityEngine.Random.Range(0,V.Count-1)];
 			List<int[]> neigbours = neighborCells (grid, vertex);
 			if (neigbours.Count > 0) {
@@ -186,6 +189,8 @@ public class Maze : MonoBehaviour {
 					if (cell_data [3] == 0) {
 						CreateMazeWall (new IntVector2 (row, col), 3);
 					}
+					print (row + col);
+
 				}
 			}
 		}
@@ -233,6 +238,7 @@ public class Maze : MonoBehaviour {
 		newWall.coordinates = coordinates;
 		newWall.name = "Outer Wall " + coordinates.x + ", " + coordinates.z;
 		newWall.transform.parent = transform;
+		print(newWall.transform.localScale.x);
 		if (direction == 0) {
 			newWall.transform.localPosition = new Vector3(coordinates.x*3 - size.x * 0.5f, newWall.transform.localScale.y/2, coordinates.z*3 - size.z * 0.5f-1.5f);
 			newWall.transform.Rotate (0, 90, 0);
