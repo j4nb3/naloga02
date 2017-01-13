@@ -18,7 +18,12 @@ public class Pathfinding : MonoBehaviour {
     }
 
     void Update() {
+        if (pathfinder == null)
+        {
+            return;
+        }
         FindPath(pathfinder.position, target.position);
+
     }
 
     IEnumerator DoPath() {
