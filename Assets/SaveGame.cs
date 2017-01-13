@@ -48,10 +48,12 @@ public class SaveGame : MonoBehaviour {
         PositionY = gameObject.transform.position.y;
         PositionZ = gameObject.transform.position.z;
 
-        PositionZX= GameObject.Find("Zombie").transform.position.x;
-        PositionZY = GameObject.Find("Zombie").transform.position.y;
-        PositionZZ = GameObject.Find("Zombie").transform.position.z;
-
+        if(GameObject.FindGameObjectWithTag("zombi")==true)
+        {
+            PositionZX = GameObject.Find("Zombie").transform.position.x;
+            PositionZY = GameObject.Find("Zombie").transform.position.y;
+            PositionZZ = GameObject.Find("Zombie").transform.position.z;
+        }
         if (Input.GetKeyDown(KeyCode.F5))
         {
             if(st_shranitev>=shrani)
@@ -87,7 +89,11 @@ public class SaveGame : MonoBehaviour {
             ammo.trenutno_reload = PlayerPrefs.GetInt("Reload");
 
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
-            GameObject.Find("Zombie").transform.position = new Vector3(PlayerPrefs.GetFloat("ZX"), PlayerPrefs.GetFloat("ZY"), PlayerPrefs.GetFloat("ZZ"));
+
+            if (GameObject.FindGameObjectWithTag("zombi") == true)
+            {
+                GameObject.Find("Zombie").transform.position = new Vector3(PlayerPrefs.GetFloat("ZX"), PlayerPrefs.GetFloat("ZY"), PlayerPrefs.GetFloat("ZZ"));
+            }
             StartCoroutine(Cakaj(2));
         }
 	

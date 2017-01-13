@@ -479,6 +479,8 @@ MonoBehaviour:
   rel: {fileID: 437240178}
   metek: {fileID: 620468976}
   prefab: {fileID: 1000011825623996, guid: 24288e39900e03140b1582ec91549fb1, type: 2}
+  weapon: {fileID: 1693468280}
+  ammobar: {fileID: 1558281079}
 --- !u!1 &120276439
 GameObject:
   m_ObjectHideFlags: 0
@@ -7811,6 +7813,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 115749927}
+    - target: {fileID: 1000010536315204, guid: 435f628b21fd3864f92f8a7558183403, type: 2}
+      propertyPath: m_TagString
+      value: zombi
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 435f628b21fd3864f92f8a7558183403, type: 2}
   m_IsPrefabParent: 0
@@ -8147,7 +8153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5, y: 3.64}
+  m_AnchoredPosition: {x: 5, y: 3.6400146}
   m_SizeDelta: {x: 300, y: 40.08}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1251471428
@@ -10322,7 +10328,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -16856,6 +16862,19 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000010536315204, guid: 435f628b21fd3864f92f8a7558183403,
     type: 2}
   m_PrefabInternal: {fileID: 1140957300}
+--- !u!136 &1694998470
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694998469}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.33459887
+  m_Height: 1.9359446
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0.3}
 --- !u!82 &1694998472
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16936,6 +16955,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1694998474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694998469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9595c83396b7f30418faf92d0404095f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 300
 --- !u!1 &1697899737 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100008, guid: a8f7f937636cdc14bbe459f59e7048a3, type: 3}

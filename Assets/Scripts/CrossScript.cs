@@ -20,6 +20,8 @@ public class CrossScript : MonoBehaviour
     public AudioSource metek;
 
     public GameObject prefab;
+    public WeaponSystem weapon;
+    public GameObject ammobar;
 
     // Use this for initialization
     void Start()
@@ -31,6 +33,12 @@ public class CrossScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(weapon.currentWeapon!=0)
+        {
+            ammobar.SetActive(false);
+            return;
+        }
+        ammobar.SetActive(true);
         noter.text = "" + trenutno_noter;
         reload.text = "" + trenutno_reload;
         if (Input.GetMouseButtonDown(0))
@@ -93,6 +101,7 @@ public class CrossScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            //13 na 10
             if (trenutno_reload > 24)
             {
                 if (trenutno_noter == 0)

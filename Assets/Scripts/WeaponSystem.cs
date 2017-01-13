@@ -136,12 +136,11 @@ public class WeaponSystem : MonoBehaviour {
         if(Physics.Raycast(ray, out hit))
         {
             distance = hit.distance;
-            if(distance < maxDistance)
+            if(distance < maxDistance || currentWeapon==0)
             {
-                if(hit.collider.tag == "Dummy")
+                if(hit.collider.tag == "Dummy"|| hit.collider.tag=="zombi")
                 {
                     hit.transform.SendMessageUpwards("ApplyDamage", damage);
-                    Debug.Log("HIYAAAAAAAAAAAAAAA");
                 }
             }
         }
