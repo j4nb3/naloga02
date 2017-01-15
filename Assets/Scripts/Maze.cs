@@ -27,11 +27,14 @@ public class Maze : MonoBehaviour {
 	public MazeCell floorPrefab;
 	public MazeWall wallPrefab;
 	public MazeCell stropPrefab;
+    public MazeZombie zombi;
+    
 
 	private MazeCell[,] cells;
 	private MazeWall[,] walls;
 	private MazeWall[,] outerwalls;
 	private MazeCell[,] strop;
+    private MazeZombie[,] zombiji;
 
 	private int[,] grid;
 
@@ -170,22 +173,31 @@ public class Maze : MonoBehaviour {
 		}
 		for(int row=0; row<num_rows; row++){
 			for(int col=0; col<num_cols; col++){
+                if (row%5==0 && col%5==0)
+                {
+                    CreateZombie(new IntVector2(row, col));
+                }
 				CreateCell (new IntVector2 (row, col));
-				if (row == 10 && col == 0) {
+                if (row == 10 && col == 0) {
 				}else{
-					int[] cell_data = new int[5] { M [row, col, 0], M [row, col, 1], M [row, col, 2], M [row, col, 3], M [row, col, 4] };
-					if (cell_data [0] == 0) {
-						CreateMazeWall (new IntVector2 (row, col), 0);
-					}
-					if (cell_data [1] == 0) {
-						CreateMazeWall (new IntVector2 (row, col), 1);
-					}
-					if (cell_data [2] == 0) {
-						CreateMazeWall (new IntVector2 (row, col), 2);
-					}
-					if (cell_data [3] == 0) {
-						CreateMazeWall (new IntVector2 (row, col), 3);
-					}
+                    int[] cell_data = new int[5] { M[row, col, 0], M[row, col, 1], M[row, col, 2], M[row, col, 3], M[row, col, 4] };
+                    if (cell_data[0] == 0)
+                    {
+                        CreateMazeWall(new IntVector2(row, col), 0);
+                    }
+                    if (cell_data[1] == 0)
+                    {
+                        CreateMazeWall(new IntVector2(row, col), 1);
+                    }
+                    if (cell_data[2] == 0)
+                    {
+                        CreateMazeWall(new IntVector2(row, col), 2);
+                    }
+                    if (cell_data[3] == 0)
+                    {
+                        CreateMazeWall(new IntVector2(row, col), 3);
+                    }
+
 				}
 			}
 		}
@@ -196,8 +208,9 @@ public class Maze : MonoBehaviour {
 		for (int i = 0; i < num_rows; i++) {
 			if (i != 10) {
 				CreateOuterMazeWall (new IntVector2 (i, 0), 0);
-			}
-			CreateOuterMazeWall (new IntVector2 (i, num_cols), 0);
+                CreateOuterMazeWall(new IntVector2(i, num_cols), 0);
+            }
+
 		}
 
 	}
@@ -206,6 +219,7 @@ public class Maze : MonoBehaviour {
 		strop = new MazeCell[size.x, size.z];
 		walls = new MazeWall[size.x, size.z];
 		outerwalls = new MazeWall[size.x+2, size.z+2];
+        zombiji = new MazeZombie[size.x, size.z];
 		GenV2 ();
 	}
 
@@ -224,7 +238,7 @@ public class Maze : MonoBehaviour {
 		newCell1.name = "Strop Cell " + coordinates.x + ", " + coordinates.z;
 		newCell1.transform.parent = transform;
 		newCell1.transform.localPosition =
-			new Vector3(coordinates.x*3 - size.x * 0.5f , 5f, coordinates.z*3 - size.z * 0.5f);
+			new Vector3(coordinates.x*3 - size.x * 0.5f , 2.5f, coordinates.z*3 - size.z * 0.5f);
 		newCell1.transform.Rotate (-180, -180 , -180);
 	}
 	private void CreateOuterMazeWall(IntVector2 coordinates, int direction){
@@ -262,5 +276,15 @@ public class Maze : MonoBehaviour {
 		//				newWall.transform.localPosition = new Vector3(coordinates.x*3 - size.x * 0.5f+ newWall.transform.localScale.x/2 , newWall.transform.localScale.y/2, coordinates.z*3 - size.z * 0.5f + 0.5f + newWall.transform.localScale.z/2);
 		//}
 	}
+    private void CreateZombie(IntVector2 coordinates)
+    {
+        MazeZombie newZombie = Instantiate(zombi) as MazeZombie;
+        zombiji[coordinates.x, coordinates.z] = newZombie;
+        newZombie.coordinates = coordinates;
+        newZombie.name = "Zombie " + coordinates.x + ", " + coordinates.z;
+        newZombie.transform.parent = transform;
+        newZombie.transform.localPosition = new Vector3(coordinates.x * 3 - size.x * 0.5f, 0, coordinates.z * 3 - size.z * 0.5f - 0.5f);
+        newZombie.transform.Rotate(0, 90, 0);
+    }
 
 }

@@ -16,10 +16,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000012675561004}
-  - 114: {fileID: 114000010831272926}
+  - component: {fileID: 4000012675561004}
+  - component: {fileID: 114000010831272926}
   m_Layer: 0
   m_Name: Maze
   m_TagString: Untagged
@@ -57,6 +57,7 @@ MonoBehaviour:
     type: 2}
   stropPrefab: {fileID: 114000013755418538, guid: f5dce805aa05f42e091c4ce5015625c4,
     type: 2}
+  zombi: {fileID: 114048596831890012, guid: 435f628b21fd3864f92f8a7558183403, type: 2}
   generationStepDelay: 0
   size:
     x: 41
