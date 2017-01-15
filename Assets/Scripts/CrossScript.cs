@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class CrossScript : MonoBehaviour
 {
@@ -53,8 +52,7 @@ public class CrossScript : MonoBehaviour
                 desno.GetComponent<Animator>().enabled = true;
 
                 RaycastHit hit = new RaycastHit();
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)) { //, 10000f, ~LayerMask.GetMask("Zombie")
-                    if(hit.transform.name != "Zombie" || hit.transform.name != "Dummy")
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10000f, ~LayerMask.GetMask("Zombie"))) {
                         Instantiate(prefab, hit.point, Quaternion.LookRotation(hit.normal));
                 }
 
