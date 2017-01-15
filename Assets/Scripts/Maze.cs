@@ -34,7 +34,7 @@ public class Maze : MonoBehaviour {
 	private MazeWall[,] walls;
 	private MazeWall[,] outerwalls;
 	private MazeCell[,] strop;
-    private MazeZombie[,] zombiji;
+    public MazeZombie[,] zombiji;
 
 	private int[,] grid;
 
@@ -173,10 +173,6 @@ public class Maze : MonoBehaviour {
 		}
 		for(int row=0; row<num_rows; row++){
 			for(int col=0; col<num_cols; col++){
-                if (row%5==0 && col%5==0)
-                {
-                    CreateZombie(new IntVector2(row, col));
-                }
 				CreateCell (new IntVector2 (row, col));
                 if (row == 10 && col == 0) {
 				}else{
@@ -201,6 +197,9 @@ public class Maze : MonoBehaviour {
 				}
 			}
 		}
+
+        CreateZombie(new IntVector2(size.x / 2, size.z / 2));
+
 		for (int i = 0; i < num_cols; i++) {
 			CreateOuterMazeWall (new IntVector2 (0, i), 1);
 			CreateOuterMazeWall (new IntVector2 (num_rows, i), 1);
@@ -285,6 +284,8 @@ public class Maze : MonoBehaviour {
         newZombie.transform.parent = transform;
         newZombie.transform.localPosition = new Vector3(coordinates.x * 3 - size.x * 0.5f, 0, coordinates.z * 3 - size.z * 0.5f - 0.5f);
         newZombie.transform.Rotate(0, 90, 0);
+        newZombie.GetComponent<ZombieAI>().pathfinding = GameObject.FindGameObjectWithTag("Pathfinding").GetComponent<Pathfinding>();
+        newZombie.GetComponent<ZombieAI>().target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
 }

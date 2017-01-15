@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Pathfinding : MonoBehaviour {
 
     public Transform pathfinder, target;
+    public Maze maze;
 
     private Grid grid;
     private Node oldTargetNode;
@@ -14,31 +15,19 @@ public class Pathfinding : MonoBehaviour {
     }
 
     void Start() {
-        //StartCoroutine(DoPath());
+
     }
 
     void Update() {
-        if (pathfinder == null)
-        {
-            return;
-        }
-        FindPath(pathfinder.position, target.position);
 
     }
 
-    IEnumerator DoPath() {
-        while (true) {
-            FindPath(pathfinder.position, target.position);
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
-    void FindPath(Vector3 startPos, Vector3 targetPos) {
+    public List<Node> FindPath(Vector3 startPos, Vector3 targetPos) {
         Node startNode = grid.NodeFromWorldPoint(startPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
         if (!targetNode.walkable)
-            return;
+            return null;
 
         Heap<Node> heap = new Heap<Node>(grid.MaxSize);
         List<Node> visited = new List<Node>();
@@ -49,8 +38,7 @@ public class Pathfinding : MonoBehaviour {
             visited.Add(node);
 
             if (node == targetNode) {
-                RetracePath(startNode, targetNode);
-                return;
+                return RetracePath(startNode, targetNode);
             }
 
             foreach (Node neighbour in grid.GetNeighbours(node)) {
@@ -72,9 +60,11 @@ public class Pathfinding : MonoBehaviour {
                 }
             }
         }
+
+        return null;
     }
 
-    void RetracePath(Node startNode, Node endNode) {
+    List<Node> RetracePath(Node startNode, Node endNode) {
         List<Node> path = new List<Node>();
         Node currentNode = endNode;
 
@@ -85,6 +75,8 @@ public class Pathfinding : MonoBehaviour {
 
         path.Reverse();
         grid.path = path;
+
+        return path;
 
     }
 
