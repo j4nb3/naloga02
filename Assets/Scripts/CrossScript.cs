@@ -53,9 +53,9 @@ public class CrossScript : MonoBehaviour
                 desno.GetComponent<Animator>().enabled = true;
 
                 RaycastHit hit = new RaycastHit();
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)) {
-                    //Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red, 5.0f);
-                    Instantiate(prefab, hit.point, Quaternion.LookRotation(hit.normal));
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)) { //, 10000f, ~LayerMask.GetMask("Zombie")
+                    if(hit.transform.name != "Zombie" || hit.transform.name != "Dummy")
+                        Instantiate(prefab, hit.point, Quaternion.LookRotation(hit.normal));
                 }
 
                 Invoke("CakajAnim", 0.08f);
